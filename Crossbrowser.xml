@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="CartSuite" parallel = "tests">
+  <test thread-count="5" name="chromeopenCartTest">
+  <parameter name="browser" value="chrome"></parameter>
+    <classes>
+      <class name="testCases.TC_001_AccountRegistrationTest"/>
+    </classes>
+  </test> 
+  
+  <test thread-count="5" name="edgeopenCartTest">
+  <parameter name="browser" value="edge"></parameter>
+    <classes>
+      <class name="testCases.TC_001_AccountRegistrationTest"/>
+    </classes>
+  </test>
+  <test thread-count="5" name="firefoxopenCartTest">
+  <parameter name="browser" value="firefox"></parameter>
+    <classes>
+      <class name="testCases.TC_001_AccountRegistrationTest"/>
+    </classes>
+  </test>
+  
+</suite> <!-- CartSuite -->
