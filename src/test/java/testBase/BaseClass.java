@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;//loggin
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -26,10 +26,11 @@ import org.testng.annotations.Parameters;
 public class BaseClass 
 {
 
-	public static WebDriver driver;
+	public  WebDriver driver;
 	public Logger logger;
     public ResourceBundle rb;
-	@BeforeClass
+    
+	@BeforeClass(groups= {"Master","Sanity","Regression"})
 	@Parameters("browser")
 	public void setup(String br) throws InterruptedException
 	{
@@ -44,29 +45,32 @@ public class BaseClass
 		if(br.equals("chrome"))
 		{
 			driver=new ChromeDriver();
-			
+			Thread.sleep(1000);
 		}
+		
 		else if(br.equals("edge"))
 		{
 			driver = new EdgeDriver();
+			
 		}
 		else
 		{
 			driver = new FirefoxDriver();
+			
 		}
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
 		driver.get(rb.getString("appURL1"));
 		
-		//driver.get("http://localhost/opencart/upload/index.php");
+		driver.get("http://localhost/opencart/upload/index.php");
 		//driver.get("https://demo.opencart.com/index.php");
 		
 		driver.manage().window().maximize();
 		Thread.sleep(3000);
 	}
 	
-	@AfterClass
+	@AfterClass(groups= {"Master","Sanity","Regression"})
 	public void tearDown()
 	{
 		driver.quit();
